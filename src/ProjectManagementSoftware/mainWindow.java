@@ -16,8 +16,6 @@ public class mainWindow extends javax.swing.JFrame {
      */
     public mainWindow() {
         initComponents();
-        int a = 24;
-        int b = 1;
     }
 
     /**
