@@ -23,6 +23,8 @@ public class Main {
         // TODO code application logic here
         Scanner input = new Scanner(System.in);
         Date projectStart = new Date();
+        Date projectEnd = new Date();
+        
         
     }
     
