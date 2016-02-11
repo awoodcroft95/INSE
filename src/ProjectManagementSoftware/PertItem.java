@@ -24,14 +24,16 @@ public class PertItem {
     public String ID;
     public ArrayList predecessorID = new ArrayList();
     public ArrayList successorID = new ArrayList();
+    public String actName;
     
     public PertItem() {
     }
     
-    public PertItem(Date startDate, Date endDate, boolean critAct){
+    public PertItem(Date startDate, Date endDate, String name, boolean critAct){
         this.startDate = startDate;
         this.endDate = endDate;
         this.critAct = critAct;
+        this.actName = name;
     }
     
     public String getID() {
@@ -41,4 +43,6 @@ public class PertItem {
     public void setID(String ID) {
         this.ID = ID;
     }
+    
+    
 }
