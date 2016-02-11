@@ -21,15 +21,16 @@ public class GANTTItem {
     public ArrayList successorID = new ArrayList();
     public String actName;
     public int lengthDays;
+    public String dateStringStart;
+    public String dateStringEnd;
     
     
     public GANTTItem() {
         
     }
     
-    public GANTTItem(Date start, Date end, String name){
-        this.startDate = start;
-        this.endDate = end;
+    public GANTTItem(int lengthDays, String name){
+        this.lengthDays = lengthDays;
         this.actName = name;
     }
     
@@ -41,4 +42,20 @@ public class GANTTItem {
         this.ID = ID;
     }
     
+    public void setDate(int day, int month, int year) {
+        startDate.setYear(year);
+        startDate.setMonth(month);
+        startDate.setDate(day);
+        
+        endDate.setYear(year);
+        endDate.setMonth(month);
+        endDate.setDate(day+lengthDays);//might not work unless it knows to move month over when day is greater than days in month
+        
+    }
+    
+    
+    public void getDate() {
+        dateStringStart = startDate.toString();
+        dateStringEnd = endDate.toString();
+    }
 }

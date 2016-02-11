@@ -25,13 +25,14 @@ public class PertItem {
     public ArrayList predecessorID = new ArrayList();
     public ArrayList successorID = new ArrayList();
     public String actName;
+    public String dateStringStart;
+    public String dateStringEnd;
     
     public PertItem() {
     }
     
-    public PertItem(Date startDate, Date endDate, String name, boolean critAct){
-        this.startDate = startDate;
-        this.endDate = endDate;
+    public PertItem(int lengthDays, String name, boolean critAct){
+        this.lengthDays = lengthDays;
         this.critAct = critAct;
         this.actName = name;
     }
@@ -43,6 +44,31 @@ public class PertItem {
     public void setID(String ID) {
         this.ID = ID;
     }
+    
+    public void addPre(String preID){
+        predecessorID.add(preID);
+    }
+    
+    public void addSuc(String sucID){
+        successorID.add(sucID);
+    }
+    
+    public void calcStartDate() {
+        
+    }
+    
+    public void setStrtDate(int day, int month, int year) {
+        startDate.setMonth(month);
+        startDate.setYear(year);
+        startDate.setDate(day);
+    }
+    
+    public void getDate() {
+        dateStringStart = startDate.toString();
+        dateStringEnd = endDate.toString();
+    }
+    
+    
     
     
 }
