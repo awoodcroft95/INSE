@@ -10,7 +10,8 @@ import java.util.ArrayList;
  *
  * @author Anthony
  */
-public class WBTItem {
+public class WBTItem 
+{
     
     public String ID;
     public String actName;
@@ -21,11 +22,13 @@ public class WBTItem {
     public int percentageWork;
     public int level;
     
-    public WBTItem(){
+    public WBTItem()
+    {
         
     }
     
-    public WBTItem(String actName){
+    public WBTItem(String actName)
+    {
         this.actName = actName;
     }
     
@@ -41,19 +44,23 @@ public class WBTItem {
         return this.ID;
     }
     
-    public void setID(String ID) {
+    public void setID(String ID)
+    {
         this.ID = ID;
     }
     
-    public void setParent(String pID){
+    public void setParent(String pID)
+    {
         this.parentID = pID;
     }
     
-    public void addChild(String cID){
+    public void addChild(String cID)
+    {
         childrenID.add(cID);
     }
     
-    public void setInfo(String info){
+    public void setInfo(String info)
+    {
         this.activityInfo = info;
     }    
     
