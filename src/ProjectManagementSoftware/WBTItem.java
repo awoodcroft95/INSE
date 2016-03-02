@@ -17,6 +17,9 @@ public class WBTItem {
     public String parentID;
     public ArrayList childrenID = new ArrayList();
     public String activityInfo;
+    public String code;
+    public int percentageWork;
+    public int level;
     
     public WBTItem(){
         
@@ -24,6 +27,14 @@ public class WBTItem {
     
     public WBTItem(String actName){
         this.actName = actName;
+    }
+    
+    public void setLevel(int level){
+        this.level = level;
+    }
+    
+    public void setPercentage(int percentage){
+        this.percentageWork = percentage;
     }
     
     public String getID() {
