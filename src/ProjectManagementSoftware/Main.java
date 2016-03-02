@@ -14,12 +14,14 @@ import java.io.*;
 import java.util.*;
 
 
-public class Main {
+public class Main 
+{
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException 
+    {
         // TODO code application logic here
         Scanner input = new Scanner(System.in);
         Date projectStart = new Date();

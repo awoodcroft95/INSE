@@ -13,6 +13,13 @@ import java.util.ArrayList;
 public class WBTItem {
     
     public String ID;
+    
+    
+    
+    public String Test;
+    
+    
+    
     public String actName;
     public String parentID;
     public ArrayList childrenID = new ArrayList();
