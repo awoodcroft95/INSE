@@ -10,39 +10,57 @@ import java.util.ArrayList;
  *
  * @author Anthony
  */
-public class WBTItem {
+public class WBTItem 
+{
     
     public String ID;
     public String actName;
     public String parentID;
     public ArrayList childrenID = new ArrayList();
     public String activityInfo;
+    public String code;
+    public int percentageWork;
+    public int level;
     
-    public WBTItem(){
+    public WBTItem()
+    {
         
     }
     
-    public WBTItem(String actName){
+    public WBTItem(String actName)
+    {
         this.actName = actName;
+    }
+    
+    public void setLevel(int level){
+        this.level = level;
+    }
+    
+    public void setPercentage(int percentage){
+        this.percentageWork = percentage;
     }
     
     public String getID() {
         return this.ID;
     }
     
-    public void setID(String ID) {
+    public void setID(String ID)
+    {
         this.ID = ID;
     }
     
-    public void setParent(String pID){
+    public void setParent(String pID)
+    {
         this.parentID = pID;
     }
     
-    public void addChild(String cID){
+    public void addChild(String cID)
+    {
         childrenID.add(cID);
     }
     
-    public void setInfo(String info){
+    public void setInfo(String info)
+    {
         this.activityInfo = info;
     }    
     
