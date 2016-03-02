@@ -5,6 +5,7 @@
  */
 package ProjectManagementSoftware;
 
+
 /**
  *
  * @author Anthony
@@ -12,20 +13,42 @@ package ProjectManagementSoftware;
 
 import java.io.*;
 import java.util.*;
+import java.util.Date;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import java.util.Calendar;
 
 
 public class Main 
 {
 
-    /**
-     * @param args the command line arguments
-     */
+    
+    
     public static void main(String[] args) throws IOException 
     {
-        // TODO code application logic here
+       
+        String dateFormat = "dd/MM/yyyy";
+        
+        SimpleDateFormat sfd = new SDF(dateFormat);
+        
+        try()
+        {
+            
+        
+        }
         Scanner input = new Scanner(System.in);
         Date projectStart = new Date();
         Date projectEnd = new Date();
+        
+        Calendar cal;
+        cal.se
+        
+        System.out.println("Enter the start date:");
+        projectStart.inputText = input.nextLine();
+        
+        System.out.println(inputText);
         
         
     }
