@@ -53,6 +53,13 @@ public class GANTTItem {
         
     }
     
+    public void addPre(String preID){
+        predecessorID.add(preID);
+    }
+    
+    public void addSuc(String sucID){
+        successorID.add(sucID);
+    }
     
     public void getDate() {
         dateStringStart = startDate.toString();
