@@ -31,24 +31,31 @@ public class Main
        
         String dateFormat = "dd/MM/yyyy";
         
-        SimpleDateFormat sfd = new SDF(dateFormat);
+        SimpleDateFormat sfd = new SimpleDateFormat(dateFormat);
         
-        try()
-        {
-            
-        
-        }
         Scanner input = new Scanner(System.in);
+        
         Date projectStart = new Date();
         Date projectEnd = new Date();
         
-        Calendar cal;
-        cal.se
+        try
+        {
+            System.out.println("Enter the start date: ");
+            projectStart = sfd.parse(input.nextLine());
+            
+            System.out.println("Enter the End date: ");
+            projectEnd = sfd.parse(input.nextLine());
         
-        System.out.println("Enter the start date:");
-        projectStart.inputText = input.nextLine();
+        }
+        catch(Exception e)
+        {
+            
+        }
         
-        System.out.println(inputText);
+
+        System.err.println("Project Start date: " + projectStart.toString());
+        System.err.println("Project End date: " + projectStart.toString());
+        
         
         
     }
