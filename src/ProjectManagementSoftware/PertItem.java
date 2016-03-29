@@ -5,8 +5,13 @@
  */
 package ProjectManagementSoftware;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -14,10 +19,10 @@ import java.util.Date;
  */
 public class PertItem {
     
-    public Date startDate = new Date();
-    public Date endDate = new Date();
-    public Date lateStart = new Date();
-    public Date lateEnd = new Date();
+    public Calendar startDate = Calendar.getInstance();
+    public Calendar endDate = Calendar.getInstance();
+    public Calendar lateStart = Calendar.getInstance();
+    public Calendar lateEnd = Calendar.getInstance();
     public boolean critAct; 
     public int lengthDays;
     public int stackDays;
@@ -27,6 +32,8 @@ public class PertItem {
     public String actName;
     public String dateStringStart;
     public String dateStringEnd;
+    private String dateFormat = "dd/MM/yyyy";
+    SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
     
     public PertItem() {
     }
@@ -57,10 +64,19 @@ public class PertItem {
         
     }
     
-    public void setStrtDate(int day, int month, int year) {
-        startDate.setMonth(month);
-        startDate.setYear(year);
-        startDate.setDate(day);
+    public void setDate(String date) {
+        try {
+            startDate.setTime(sdf.parse(date));
+        } catch (ParseException ex) {
+            Logger.getLogger(GANTTItem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (startDate.isSet(Calendar.DAY_OF_MONTH) && startDate.isSet(Calendar.MONTH) && startDate.isSet(Calendar.YEAR)){       
+        endDate = (Calendar) startDate.clone();
+        endDate.add(Calendar.DATE, lengthDays);
+        }
+        else{
+            System.err.println("No valid date given.");
+        }
     }
     
     public void getDate() {
