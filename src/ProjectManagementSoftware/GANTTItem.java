@@ -1,21 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ProjectManagementSoftware;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Calendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
- * @author Anthony
+ * @author UP730799
  */
 public class GANTTItem {
     
-    public Date startDate = new Date();
-    public Date endDate = new Date();
+    public Calendar startDate = Calendar.getInstance();
+    public Calendar endDate = Calendar.getInstance();
     public String ID;
     public ArrayList predecessorID = new ArrayList();
     public ArrayList successorID = new ArrayList();
@@ -23,7 +24,8 @@ public class GANTTItem {
     public int lengthDays;
     public String dateStringStart;
     public String dateStringEnd;
-    
+    private String dateFormat = "dd/MM/yyyy";
+    SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
     
     public GANTTItem() {
         
@@ -42,15 +44,19 @@ public class GANTTItem {
         this.ID = ID;
     }
     
-    public void setDate(int day, int month, int year) {
-        startDate.setYear(year);
-        startDate.setMonth(month);
-        startDate.setDate(day);
-        
-        endDate.setYear(year);
-        endDate.setMonth(month);
-        endDate.setDate(day+lengthDays);//might not work unless it knows to move month over when day is greater than days in month
-        
+    public void setDate(String date) {
+        try {
+            startDate.setTime(sdf.parse(date));
+        } catch (ParseException ex) {
+            Logger.getLogger(GANTTItem.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (startDate.isSet(Calendar.DAY_OF_MONTH) && startDate.isSet(Calendar.MONTH) && startDate.isSet(Calendar.YEAR)){       
+        endDate = (Calendar) startDate.clone();
+        endDate.add(Calendar.DATE, lengthDays);
+        }
+        else{
+            System.err.println("No valid date given.");
+        }
     }
     
     public void addPre(String preID){
