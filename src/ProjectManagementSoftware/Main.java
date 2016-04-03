@@ -72,9 +72,9 @@ public class Main
         if ("WBT".equals(item.getType())){    
             id = "WBT" + id_A + id_B + id_C + id_D;
         }else if ("GNT".equals(item.getType())){
-            id = "WBT" + id_A + id_B + id_C + id_D;
+            id = "GNT" + id_A + id_B + id_C + id_D;
         }else if ("PRT".equals(item.getType())){
-            id = "WBT" + id_A + id_B + id_C + id_D;
+            id = "PRT" + id_A + id_B + id_C + id_D;
         }else{
             System.out.println("Not a valid Item given.");
         }
