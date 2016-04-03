@@ -34,8 +34,10 @@ public class PertItem {
     public String dateStringEnd;
     private String dateFormat = "dd/MM/yyyy";
     SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+    public String type;
     
     public PertItem() {
+        this.type = "PRT";
     }
     
     public PertItem(int lengthDays, String name, boolean critAct){
@@ -84,7 +86,9 @@ public class PertItem {
         dateStringEnd = endDate.toString();
     }
     
-    
+    public String getType(){
+        return this.getID();
+    }
     
     
 }

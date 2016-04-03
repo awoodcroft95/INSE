@@ -21,10 +21,11 @@ public class WBTItem
     public String code;
     public int percentageWork;
     public int level;
+    public String type;
     
     public WBTItem()
     {
-        
+        type = "WBT";
     }
     
     public WBTItem(String actName)
@@ -62,6 +63,10 @@ public class WBTItem
     public void setInfo(String info)
     {
         this.activityInfo = info;
-    }    
+    }
+    
+    public String getType(){
+        return this.getID();
+    }
     
 }

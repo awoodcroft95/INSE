@@ -14,17 +14,17 @@ package ProjectManagementSoftware;
 import java.io.*;
 import java.util.*;
 import java.util.Date;
-
-
+import java.util.Random;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
 import java.util.Calendar;
 
 
 public class Main 
 {
 
+    Random randGen = new Random();
+    String alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
     
     
     public static void main(String[] args) throws IOException 
@@ -60,6 +60,25 @@ public class Main
         
         
         
+    }
+    
+    public void generateID(activityItem item){
+        int charSelect = randGen.nextInt(26);
+        int id_A = randGen.nextInt(1000000);
+        char id_B = alpha.charAt(charSelect);
+        char id_C = alpha.charAt(charSelect);
+        char id_D = alpha.charAt(charSelect);
+        String id = null;
+        if ("WBT".equals(item.getType())){    
+            id = "WBT" + id_A + id_B + id_C + id_D;
+        }else if ("GNT".equals(item.getType())){
+            id = "WBT" + id_A + id_B + id_C + id_D;
+        }else if ("PRT".equals(item.getType())){
+            id = "WBT" + id_A + id_B + id_C + id_D;
+        }else{
+            System.out.println("Not a valid Item given.");
+        }
+        item.setID(id);
     }
     
 }

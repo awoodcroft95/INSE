@@ -26,9 +26,10 @@ public class GANTTItem {
     public String dateStringEnd;
     private String dateFormat = "dd/MM/yyyy";
     SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+    public String type;
     
     public GANTTItem() {
-        
+        this.type = "GNT";
     }
     
     public GANTTItem(int lengthDays, String name){
@@ -70,5 +71,9 @@ public class GANTTItem {
     public void getDate() {
         dateStringStart = startDate.toString();
         dateStringEnd = endDate.toString();
+    }
+    
+    public String getType(){
+        return this.getID();
     }
 }
