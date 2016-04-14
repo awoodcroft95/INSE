@@ -24,12 +24,8 @@ import java.util.Calendar;
 
 public class Main 
 {
-
-    
-    
     public static void main(String[] args) throws IOException 
     {
-       
         String dateFormat = "dd/MM/yyyy";
         
         SimpleDateFormat sfd = new SimpleDateFormat(dateFormat);
@@ -46,8 +42,6 @@ public class Main
             
             System.out.println("Enter the End date: ");
             projectEnd = sfd.parse(input.nextLine());
-            
-        
         }
         catch(Exception e)
         {
