@@ -11,6 +11,8 @@ import java.util.Random;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 /**
  *
@@ -31,6 +33,7 @@ public class mainWindow extends javax.swing.JFrame {
     SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
     Calendar projectStart;
     Calendar projectEnd;
+    int activityNumber = 1;
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -58,9 +61,11 @@ public class mainWindow extends javax.swing.JFrame {
         endDate = new javax.swing.JTextField();
         projectEntryConfirm = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
-        jTabbedPane4 = new javax.swing.JTabbedPane();
-        jTabbedPane5 = new javax.swing.JTabbedPane();
+        ganttTab = new javax.swing.JTabbedPane();
+        ganttPane = new java.awt.ScrollPane();
+        pertTab = new javax.swing.JTabbedPane();
+        canvas2 = new java.awt.Canvas();
+        wbtTab = new javax.swing.JTabbedPane();
         activityName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -68,6 +73,8 @@ public class mainWindow extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         activityLengthDays = new javax.swing.JTextField();
         addActivity = new javax.swing.JButton();
+        scrollbar1 = new java.awt.Scrollbar();
+        criticalAct = new javax.swing.JCheckBox();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -208,9 +215,14 @@ public class mainWindow extends javax.swing.JFrame {
                     .addGap(160, 160, 160)))
         );
 
-        jTabbedPane1.addTab("Gantt", jTabbedPane2);
-        jTabbedPane1.addTab("PERT", jTabbedPane4);
-        jTabbedPane1.addTab("WBT", jTabbedPane5);
+        ganttTab.addTab("tab1", ganttPane);
+
+        jTabbedPane1.addTab("Gantt", ganttTab);
+
+        pertTab.addTab("tab1", canvas2);
+
+        jTabbedPane1.addTab("PERT", pertTab);
+        jTabbedPane1.addTab("WBT", wbtTab);
 
         jLabel3.setText("Activity Name");
 
@@ -224,6 +236,8 @@ public class mainWindow extends javax.swing.JFrame {
                 addActivityActionPerformed(evt);
             }
         });
+
+        criticalAct.setText("Critical Activity?");
 
         jMenu1.setText("New");
         jMenuBar1.add(jMenu1);
@@ -253,9 +267,6 @@ public class mainWindow extends javax.swing.JFrame {
                 .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -271,27 +282,42 @@ public class mainWindow extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(activityLengthDays, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(addActivity))
-                            .addComponent(jLabel5))))
-                .addContainerGap(13, Short.MAX_VALUE))
+                                .addComponent(addActivity)
+                                .addGap(18, 18, 18)
+                                .addComponent(criticalAct))
+                            .addComponent(jLabel5))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(scrollbar1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(activityName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(activityStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(activityLengthDays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(addActivity))
-                .addGap(18, 18, 18)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(scrollbar1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(activityName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(activityStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(activityLengthDays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(addActivity)
+                            .addComponent(criticalAct))
+                        .addGap(18, 18, 18)
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(142, 142, 142))
         );
 
         pack();
@@ -338,23 +364,36 @@ public class mainWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_addActivityActionPerformed
 
     
-    public void generateID(activityItem item){
+    public String generateID(int typeNum){
         int charSelect = randGen.nextInt(26);
         int id_A = randGen.nextInt(1000000);
         char id_B = alpha.charAt(charSelect);
         char id_C = alpha.charAt(charSelect);
         char id_D = alpha.charAt(charSelect);
         String id = null;
-        if ("WBT".equals(item.getType())){    
+        if (typeNum == 1){    
             id = "WBT" + id_A + id_B + id_C + id_D;
-        }else if ("GNT".equals(item.getType())){
+        }else if (typeNum == 2){
             id = "GNT" + id_A + id_B + id_C + id_D;
-        }else if ("PRT".equals(item.getType())){
+        }else if (typeNum == 3){
             id = "PRT" + id_A + id_B + id_C + id_D;
         }else{
             System.out.println("Not a valid Item given.");
         }
-        item.setID(id);
+        return id;
+    }
+    
+    public void createActivity(){
+        String activityNm = activityName.getText();
+        String activityStDt = activityStartDate.getText();
+        int activityLgthDy = Integer.parseInt(activityLengthDays.getText());
+        boolean critAct = criticalAct.isSelected();
+        PertItem newPertAct =  new PertItem(activityLgthDy, activityNm, critAct);
+        newPertAct.setID(generateID(3));
+        GANTTItem newGANTTAct = new GANTTItem(activityLgthDy, activityNm);
+        newGANTTAct.setID(generateID(2));
+        WBTItem newWBTAct = new WBTItem(activityNm);
+        newWBTAct.setID(generateID(1));
     }
     
     /**
@@ -397,7 +436,11 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JTextField activityName;
     private javax.swing.JTextField activityStartDate;
     private javax.swing.JButton addActivity;
+    private java.awt.Canvas canvas2;
+    private javax.swing.JCheckBox criticalAct;
     private javax.swing.JTextField endDate;
+    private java.awt.ScrollPane ganttPane;
+    private javax.swing.JTabbedPane ganttTab;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -418,14 +461,14 @@ public class mainWindow extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
-    private javax.swing.JTabbedPane jTabbedPane4;
-    private javax.swing.JTabbedPane jTabbedPane5;
     private java.awt.Menu menu1;
     private java.awt.Menu menu2;
     private java.awt.MenuBar menuBar1;
     private java.awt.Panel panel1;
+    private javax.swing.JTabbedPane pertTab;
     private javax.swing.JButton projectEntryConfirm;
+    private java.awt.Scrollbar scrollbar1;
     private javax.swing.JTextField startDate;
+    private javax.swing.JTabbedPane wbtTab;
     // End of variables declaration//GEN-END:variables
 }
