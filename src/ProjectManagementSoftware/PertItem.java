@@ -24,25 +24,38 @@ public class PertItem {
     public Calendar lateEnd = Calendar.getInstance();
     public boolean critAct; 
     public int lengthDays;
-    public int stackDays;
+    public int slackDays;
     public String ID;
     public ArrayList predecessorID = new ArrayList();
     public ArrayList successorID = new ArrayList();
     public String actName;
     public String dateStringStart;
     public String dateStringEnd;
-    private String dateFormat = "dd/MM/yyyy";
+    public String dateStringLateStart;
+    public String dateStringLateEnd;
+    private String dateFormat = "dd/MM/yyyy";;
     SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
     public String type;
     
     public PertItem() {
+        
         this.type = "PRT";
     }
     
+    public PertItem(String name, boolean critAct){
+        this.dateFormat = "dd/MM/yyyy";
+        this.critAct = critAct;
+        this.actName = name;
+    }
+    
     public PertItem(int lengthDays, String name, boolean critAct){
+        this.dateFormat = "dd/MM/yyyy";
         this.lengthDays = lengthDays;
         this.critAct = critAct;
         this.actName = name;
+        this.dateStringLateStart = "";
+        this.dateStringLateEnd = "";
+        this.slackDays = 0;
     }
     
     public String getID() {
@@ -61,19 +74,17 @@ public class PertItem {
         successorID.add(sucID);
     }
     
-    public void calcStartDate() {
-        
-    }
-    
     public void setDate(String date) {
         try {
             startDate.setTime(sdf.parse(date));
         } catch (ParseException ex) {
-            Logger.getLogger(GANTTItem.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PertItem.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (startDate.isSet(Calendar.DAY_OF_MONTH) && startDate.isSet(Calendar.MONTH) && startDate.isSet(Calendar.YEAR)){       
         endDate = (Calendar) startDate.clone();
         endDate.add(Calendar.DATE, lengthDays);
+        dateStringStart = date;
+        dateStringEnd = sdf.format(endDate.getTime());
         }
         else{
             System.err.println("No valid date given.");
@@ -82,12 +93,29 @@ public class PertItem {
     
     public void getDate() {
         dateStringStart = startDate.toString();
-        dateStringEnd = endDate.toString();
     }
     
     public String getType(){
         return this.getID();
     }
     
+    public String returnStartDate(){
+        return dateStringStart;
+    }
     
+    public String returnEndDate(){
+        return dateStringEnd;
+    }
+    
+    public String returnSlackStart(){
+        return dateStringLateStart;
+    }
+    
+    public String returnSlackEnd(){
+        return dateStringLateEnd;
+    }
+    
+    public int returnSlack(){
+        return slackDays;
+    }
 }

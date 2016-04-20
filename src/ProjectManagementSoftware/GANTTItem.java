@@ -23,7 +23,7 @@ public class GANTTItem {
     public int lengthDays;
     public String dateStringStart;
     public String dateStringEnd;
-    private String dateFormat = "dd/MM/yyyy";
+    private String dateFormat = "dd/MM/yyyy";;
     SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
     public String type;
     
@@ -32,6 +32,7 @@ public class GANTTItem {
     }
     
     public GANTTItem(int lengthDays, String name){
+        this.dateFormat = "dd/MM/yyyy";
         this.lengthDays = lengthDays;
         this.actName = name;
     }
