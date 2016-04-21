@@ -14,6 +14,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 /**
  *
@@ -22,10 +23,10 @@ import javax.swing.JPanel;
 
 class Surface extends JPanel {
 
+    
     public void doDrawing(String actName, int x, int y, String dateStart, String dateEnd, String lateStart, String lateEnd, String duration, String slack) {
         
         Graphics2D g2d = (Graphics2D) this.getGraphics();
-        //System.out.println(g2d.toString());
         g2d.drawString(dateStart, x+50, y+50);
         g2d.drawString((duration + " days"), x+130, y+50);
         g2d.drawString(dateEnd, x+210, y+50);
@@ -40,7 +41,16 @@ class Surface extends JPanel {
         g2d.drawRect(x+40, y+105, 80, 40);//third row box 1
         g2d.drawRect(x+120, y+105, 80, 40);//third row box 2
         g2d.drawRect(x+200, y+105, 80, 40);//third row box 3
+        g2d.drawLine(x+40, y+85, x-40, y+85);
     }
+    
+    public void drawPertStart(String dateStart){
+        Graphics2D g2d = (Graphics2D) this.getGraphics();
+        g2d.drawRect(10, 75, 240, 120);
+        g2d.drawString("Project Start", 100, 135);
+        g2d.drawString(dateStart, 100, 155);
+    }
+    
     
     @Override
     public void paintComponent(Graphics g) {
@@ -70,7 +80,7 @@ public class mainWindow extends JFrame {
     ArrayList wbtActsArray = new ArrayList();
     Graphics g;
     Surface drawArea = new Surface();
-    int x = 50;
+    int x = 290;
     int y = 50;
             
             
@@ -157,12 +167,12 @@ public class mainWindow extends JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel1.setLabelFor(startDate);
-        jLabel1.setText("Project End Date (dd/mm/yy)");
+        jLabel1.setText("Project End Date (dd/mm/yyyy)");
         jLabel1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel2.setLabelFor(startDate);
-        jLabel2.setText("Project Start Date (dd/mm/yy)");
+        jLabel2.setText("Project Start Date (dd/mm/yyyy)");
         jLabel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         projectEntryConfirm.setText("Confirm Entry");
@@ -195,8 +205,9 @@ public class mainWindow extends JFrame {
                                         .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                        .addGap(0, 6, Short.MAX_VALUE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 16, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(panel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
@@ -204,10 +215,6 @@ public class mainWindow extends JFrame {
                     .addComponent(projectEntryConfirm)
                     .addComponent(endDate, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                    .addContainerGap()))
         );
         panel1Layout.setVerticalGroup(
             panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,21 +233,20 @@ public class mainWindow extends JFrame {
                 .addComponent(jButton7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton9)
-                .addGap(57, 57, 57)
+                .addGap(38, 38, 38)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(startDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(1, 1, 1)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(endDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(projectEntryConfirm)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                    .addContainerGap(249, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(160, 160, 160)))
         );
+
+        jTabbedPane1.setName("Pert"); // NOI18N
 
         jLabel3.setText("Activity Name");
 
@@ -285,6 +291,9 @@ public class mainWindow extends JFrame {
                 .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTabbedPane1))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -299,16 +308,13 @@ public class mainWindow extends JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(activityLengthDays, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(addActivity)
                                 .addGap(18, 18, 18)
-                                .addComponent(criticalAct))
+                                .addComponent(criticalAct)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(addActivity))
                             .addComponent(jLabel5))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 688, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(36, Short.MAX_VALUE))))
+                        .addGap(0, 389, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -326,9 +332,9 @@ public class mainWindow extends JFrame {
                     .addComponent(activityLengthDays, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(addActivity)
                     .addComponent(criticalAct))
-                .addGap(18, 18, 18)
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(142, 142, 142))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(86, 86, 86))
         );
 
         pack();
@@ -336,11 +342,7 @@ public class mainWindow extends JFrame {
 
     private void initOutput() {
         jTabbedPane1.add(drawArea);
-        //jTabbedPane1.add(new Surface());
-        //setTitle("Simple Java 2D example");
-        //setSize(300, 200);
-        //setLocationRelativeTo(null);
-        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
     }
     
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -377,11 +379,12 @@ public class mainWindow extends JFrame {
             projectStartPERT.setID("PRT01");
             projectStartPERT.setDate(startDate.getText());
             pertActsArray.add(projectStartPERT);
+            drawArea.drawPertStart(startDate.getText());
             GANTTItem projectStartGANTT = new GANTTItem();
             projectStartGANTT.setID("GNT01");
             projectStartGANTT.setDate(startDate.getText());
             ganttActsArray.add(projectStartGANTT);
-            PertItem projectStartWBT = new PertItem();
+            WBTItem projectStartWBT = new WBTItem();
             projectStartWBT.setID("WBT01");
             wbtActsArray.add(projectStartWBT);
         }
